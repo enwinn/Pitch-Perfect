@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+// NOTE: Full property sets and range checks are for future expansion
 
 class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     
@@ -56,6 +57,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         playAudioWithVariablePitch(-800, rate: 1.0, overlap: 8.0)
     }
     
+    @IBAction func reverbButton(sender: UIButton) {
+        playAudioWithReverb(.Cathedral, wetDryMix: 20.0)
+    }
+    
+    @IBAction func echoButton(sender: UIButton) {
+        playAudioWithEcho(1, feedback: 50.0, lowPassCutoff: 15000.0, wetDryMix: 20.0)
+    }
+    
     func playAudioSpeed (speed: Float) {
         setAudioSession()
         stopAllAudio()
@@ -65,10 +74,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         
         // Rate default is 1.0. Range is 0.5 to 2.0 (half to double)
         switch speed {
-        case 0.5...2.0:
-            audioPlayer.rate = speed
-        default:
-            audioPlayer.rate = 1.0
+            case 0.5...2.0:
+                audioPlayer.rate = speed
+            default:
+                audioPlayer.rate = 1.0
         }
         
         audioPlayer.delegate = self
@@ -84,6 +93,103 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    func playAudioWithEcho(delayTime: NSTimeInterval, feedback: Float, lowPassCutoff: Float, wetDryMix: Float) {
+        setAudioSession()
+        stopAllAudio()
+        
+        var echoPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(echoPlayerNode)
+        
+        var changeEchoEffect = AVAudioUnitDelay()
+        
+        // Time taken by the delayed input to reach the output. Range is 0 to 2 seconds. Default is 1
+        switch delayTime {
+            case 0...2:
+                changeEchoEffect.delayTime = delayTime
+            default:
+                changeEchoEffect.delayTime = 1
+        }
+        
+        // Amount of output fed back into the delay line. Range is -100% to 100%. Default is 50%
+        switch feedback {
+            case -100.0...100.0:
+                changeEchoEffect.feedback = feedback
+            default:
+                changeEchoEffect.feedback = 50.0
+        }
+        
+        var sampleRate = Float(AVAudioSession.sharedInstance().sampleRate)
+        var rangeBottom: Float = 10.0
+        var rangeTop = (sampleRate / 2.0)
+        
+        // Cutoff frequency, in Hz, above which high frequency content is rolled off
+        // Range is 10 Hz through (sampleRate/2). Default is 15000 Hz
+        switch lowPassCutoff {
+            case rangeBottom...rangeTop:
+                changeEchoEffect.lowPassCutoff = lowPassCutoff
+            default:
+                changeEchoEffect.lowPassCutoff = 15000
+        }
+        
+        // Blend of wet and dry. Range is 0% (all dry) to 100% (all wet). Default is 100%
+        switch wetDryMix {
+            case 0.0...100.0:
+                changeEchoEffect.wetDryMix = wetDryMix
+            default:
+                changeEchoEffect.wetDryMix = 100.0
+        }
+        
+        
+        audioEngine.attachNode(changeEchoEffect)
+        
+        audioEngine.connect(echoPlayerNode, to: changeEchoEffect, format: nil)
+        audioEngine.connect(changeEchoEffect, to: audioEngine.outputNode, format: nil)
+        
+        echoPlayerNode.scheduleFile(audioFile,
+            atTime: nil,
+            completionHandler: audioEngineCompletion)
+        
+        audioEngine.startAndReturnError(nil)
+        
+        stopButton.enabled = true
+        echoPlayerNode.play()
+    }
+    
+    func playAudioWithReverb(preset: AVAudioUnitReverbPreset, wetDryMix: Float ) {
+        setAudioSession()
+        stopAllAudio()
+        
+        var reverbPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(reverbPlayerNode)
+        
+        var changeReverbEffect = AVAudioUnitReverb()
+        changeReverbEffect.loadFactoryPreset(preset)
+        
+        // Blend of wet and dry. Range is 0% (all dry) to 100% (all wet). Default is 100%
+        switch wetDryMix {
+            case 0.0...100.0:
+                changeReverbEffect.wetDryMix = wetDryMix
+            default:
+                changeReverbEffect.wetDryMix = 100.0
+        }
+        
+        
+        audioEngine.attachNode(changeReverbEffect)
+        
+        audioEngine.connect(reverbPlayerNode, to: changeReverbEffect, format: nil)
+        audioEngine.connect(changeReverbEffect, to: audioEngine.outputNode, format: nil)
+        
+        reverbPlayerNode.scheduleFile(audioFile,
+            atTime: nil,
+            completionHandler: audioEngineCompletion)
+        
+        audioEngine.startAndReturnError(nil)
+        
+        stopButton.enabled = true
+        reverbPlayerNode.play()
+        
+    }
+    
     func playAudioWithVariablePitch(pitch: Float, rate: Float, overlap: Float){
         setAudioSession()
         stopAllAudio()
@@ -92,10 +198,6 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         audioEngine.attachNode(audioPlayerNode)
         
         var changePitchEffect = AVAudioUnitTimePitch()
-        var changeReverbEffect = AVAudioUnitReverb()
-        
-        changeReverbEffect.loadFactoryPreset(.LargeChamber)
-        changeReverbEffect.wetDryMix = 20.0
         
         // Pitch is defined in cents. Default is 1.0. Range is -2400.0 to 2400.0 One octave is 1200 cents, one semitone is 100 cents
         switch pitch {
@@ -122,15 +224,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         }
         
         audioEngine.attachNode(changePitchEffect)
-        audioEngine.attachNode(changeReverbEffect)
         
         audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: changeReverbEffect, format: nil)
-        audioEngine.connect(changeReverbEffect, to: audioEngine.outputNode, format: nil)
+        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile,
             atTime: nil,
-            completionHandler: audioPlayerNodeCompletion)
+            completionHandler: audioEngineCompletion)
+        
         audioEngine.startAndReturnError(nil)
         
         stopButton.enabled = true
@@ -138,11 +239,12 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         
     }
     
-    // ref: http://www.ios-developer.net/iphone-ipad-programmer/development/threads/updating-ui-controls-on-background-threads
-    // ref: Sameer pointed this out to me during our study group on 3/30/2015
-    func audioPlayerNodeCompletion() {
-        dispatch_async(dispatch_get_main_queue(), {
-            // Seems to fire a bit before audio ends, why?
+    func audioEngineCompletion() {
+        // Adjust for latency
+        let delay = 1.0 * Double(NSEC_PER_SEC)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(delayTime, dispatch_get_main_queue(), {
             self.stopButton.enabled = false
         })
     }

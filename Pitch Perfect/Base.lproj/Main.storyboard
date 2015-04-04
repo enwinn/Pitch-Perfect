@@ -63,6 +63,24 @@
                                     <action selector="DarthVaderButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="277-sX-lE4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b4-d6-Vfq">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="reverbButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reverbButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="7ZT-0q-fY8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mq-fB-9Zt">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="echoButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="echoButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="1lA-xD-uEl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,11 +89,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="dCc-Du-ni8" secondAttribute="trailing" constant="25" id="Kxz-v6-jGr"/>
                             <constraint firstAttribute="centerX" secondItem="c6T-br-Sro" secondAttribute="centerX" id="Pd0-Vu-pqo"/>
                             <constraint firstItem="e14-6P-itg" firstAttribute="top" secondItem="c6T-br-Sro" secondAttribute="bottom" constant="50" id="Q2Z-wJ-hsv"/>
+                            <constraint firstItem="7b4-d6-Vfq" firstAttribute="leading" secondItem="ieU-VJ-ekH" secondAttribute="leadingMargin" constant="35" id="TUN-S3-v1r"/>
+                            <constraint firstItem="7b4-d6-Vfq" firstAttribute="top" secondItem="fv8-Ug-OOK" secondAttribute="bottom" constant="33" id="UXb-7l-ceo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RIZ-a4-GeI" secondAttribute="trailing" constant="25" id="XJA-GM-HBa"/>
                             <constraint firstItem="5Ir-4t-W39" firstAttribute="leading" secondItem="ieU-VJ-ekH" secondAttribute="leadingMargin" constant="25" id="eNv-xp-nAz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4mq-fB-9Zt" secondAttribute="trailing" constant="35" id="jS4-mZ-D5Z"/>
                             <constraint firstItem="fv8-Ug-OOK" firstAttribute="leading" secondItem="ieU-VJ-ekH" secondAttribute="leadingMargin" constant="25" id="pPJ-BQ-tSc"/>
                             <constraint firstItem="RIZ-a4-GeI" firstAttribute="top" secondItem="FvA-Mq-qhR" secondAttribute="bottom" constant="50" id="pgn-3c-1pc"/>
                             <constraint firstItem="5Ir-4t-W39" firstAttribute="top" secondItem="FvA-Mq-qhR" secondAttribute="bottom" constant="50" id="qd5-dz-xN7"/>
+                            <constraint firstItem="4mq-fB-9Zt" firstAttribute="top" secondItem="dCc-Du-ni8" secondAttribute="bottom" constant="30" id="vU2-Fr-rMX"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -84,18 +106,24 @@
                                 <exclude reference="c6T-br-Sro"/>
                                 <exclude reference="fv8-Ug-OOK"/>
                                 <exclude reference="dCc-Du-ni8"/>
+                                <exclude reference="7b4-d6-Vfq"/>
+                                <exclude reference="4mq-fB-9Zt"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Q2Z-wJ-hsv"/>
                                 <exclude reference="eNv-xp-nAz"/>
                                 <exclude reference="qd5-dz-xN7"/>
-                                <exclude reference="XJA-GM-HBa"/>
-                                <exclude reference="pgn-3c-1pc"/>
-                                <exclude reference="Pd0-Vu-pqo"/>
-                                <exclude reference="AUg-hx-Gk3"/>
-                                <exclude reference="Kxz-v6-jGr"/>
                                 <exclude reference="Ejb-XN-LAN"/>
                                 <exclude reference="pPJ-BQ-tSc"/>
+                                <exclude reference="XJA-GM-HBa"/>
+                                <exclude reference="pgn-3c-1pc"/>
+                                <exclude reference="AUg-hx-Gk3"/>
+                                <exclude reference="Kxz-v6-jGr"/>
+                                <exclude reference="TUN-S3-v1r"/>
+                                <exclude reference="UXb-7l-ceo"/>
+                                <exclude reference="jS4-mZ-D5Z"/>
+                                <exclude reference="vU2-Fr-rMX"/>
+                                <exclude reference="Pd0-Vu-pqo"/>
+                                <exclude reference="Q2Z-wJ-hsv"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -105,18 +133,24 @@
                                 <include reference="c6T-br-Sro"/>
                                 <include reference="fv8-Ug-OOK"/>
                                 <include reference="dCc-Du-ni8"/>
+                                <include reference="7b4-d6-Vfq"/>
+                                <include reference="4mq-fB-9Zt"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Q2Z-wJ-hsv"/>
                                 <include reference="eNv-xp-nAz"/>
                                 <include reference="qd5-dz-xN7"/>
-                                <include reference="XJA-GM-HBa"/>
-                                <include reference="pgn-3c-1pc"/>
-                                <include reference="Pd0-Vu-pqo"/>
-                                <include reference="AUg-hx-Gk3"/>
-                                <include reference="Kxz-v6-jGr"/>
                                 <include reference="Ejb-XN-LAN"/>
                                 <include reference="pPJ-BQ-tSc"/>
+                                <include reference="XJA-GM-HBa"/>
+                                <include reference="pgn-3c-1pc"/>
+                                <include reference="AUg-hx-Gk3"/>
+                                <include reference="Kxz-v6-jGr"/>
+                                <include reference="TUN-S3-v1r"/>
+                                <include reference="UXb-7l-ceo"/>
+                                <include reference="jS4-mZ-D5Z"/>
+                                <include reference="vU2-Fr-rMX"/>
+                                <include reference="Pd0-Vu-pqo"/>
+                                <include reference="Q2Z-wJ-hsv"/>
                             </mask>
                         </variation>
                     </view>
@@ -242,6 +276,8 @@
         <image name="SlowButton" width="100" height="100"/>
         <image name="StopButton" width="50" height="50"/>
         <image name="chipmunkButton" width="100" height="100"/>
+        <image name="echoButton" width="80" height="80"/>
         <image name="fastButton" width="100" height="100"/>
+        <image name="reverbButton" width="80" height="80"/>
     </resources>
 </document>

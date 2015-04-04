@@ -37,7 +37,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.hidden = false
         recordButton.enabled = false
         
-        //Record the user's voice
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         
         let currentDateTime = NSDate()
@@ -58,13 +57,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
     }
     
-    //NOTE: The delegate calls this function
+    // NOTE: The delegate calls this function
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         if (flag) {
-            //Step 1 - Save the recorded audio
+            // Step 1 - Save the recorded audio
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
             
-            //Step 2 - perform segue
+            // Step 2 - perform segue
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio) }
         else {
             recordButton.enabled = true
