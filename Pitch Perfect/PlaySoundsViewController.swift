@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 // NOTE: Full property sets and range checks are for future expansion
+// NOTE: Renamed github remote repo from UDACITY to Pitch-Perfect
 
 class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     

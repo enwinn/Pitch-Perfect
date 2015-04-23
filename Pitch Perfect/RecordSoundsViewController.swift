@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Eric N. Winn. All rights reserved.
 //
 
+// NOTE: Renamed github remote repo from UDACITY to Pitch-Perfect
+
 import UIKit
 import AVFoundation
 
