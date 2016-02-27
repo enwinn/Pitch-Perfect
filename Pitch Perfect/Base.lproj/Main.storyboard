@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vvx-Fg-H5z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vvx-Fg-H5z">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -25,15 +26,6 @@
                                 </state>
                                 <connections>
                                     <action selector="playSlowAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="U3L-KX-wMl"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-a4-GeI">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" image="fastButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playFastAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="HFH-e5-olQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6T-br-Sro">
@@ -81,6 +73,15 @@
                                     <action selector="echoButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="1lA-xD-uEl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-a4-GeI">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="fastButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playFastAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="HFH-e5-olQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -102,55 +103,55 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="5Ir-4t-W39"/>
-                                <exclude reference="RIZ-a4-GeI"/>
                                 <exclude reference="c6T-br-Sro"/>
                                 <exclude reference="fv8-Ug-OOK"/>
                                 <exclude reference="dCc-Du-ni8"/>
                                 <exclude reference="7b4-d6-Vfq"/>
                                 <exclude reference="4mq-fB-9Zt"/>
+                                <exclude reference="RIZ-a4-GeI"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="eNv-xp-nAz"/>
-                                <exclude reference="qd5-dz-xN7"/>
-                                <exclude reference="Ejb-XN-LAN"/>
-                                <exclude reference="pPJ-BQ-tSc"/>
-                                <exclude reference="XJA-GM-HBa"/>
-                                <exclude reference="pgn-3c-1pc"/>
-                                <exclude reference="AUg-hx-Gk3"/>
-                                <exclude reference="Kxz-v6-jGr"/>
-                                <exclude reference="TUN-S3-v1r"/>
-                                <exclude reference="UXb-7l-ceo"/>
+                                <exclude reference="Q2Z-wJ-hsv"/>
                                 <exclude reference="jS4-mZ-D5Z"/>
                                 <exclude reference="vU2-Fr-rMX"/>
+                                <exclude reference="eNv-xp-nAz"/>
+                                <exclude reference="qd5-dz-xN7"/>
+                                <exclude reference="TUN-S3-v1r"/>
+                                <exclude reference="UXb-7l-ceo"/>
+                                <exclude reference="XJA-GM-HBa"/>
+                                <exclude reference="pgn-3c-1pc"/>
                                 <exclude reference="Pd0-Vu-pqo"/>
-                                <exclude reference="Q2Z-wJ-hsv"/>
+                                <exclude reference="AUg-hx-Gk3"/>
+                                <exclude reference="Kxz-v6-jGr"/>
+                                <exclude reference="Ejb-XN-LAN"/>
+                                <exclude reference="pPJ-BQ-tSc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="5Ir-4t-W39"/>
-                                <include reference="RIZ-a4-GeI"/>
                                 <include reference="c6T-br-Sro"/>
                                 <include reference="fv8-Ug-OOK"/>
                                 <include reference="dCc-Du-ni8"/>
                                 <include reference="7b4-d6-Vfq"/>
                                 <include reference="4mq-fB-9Zt"/>
+                                <include reference="RIZ-a4-GeI"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="eNv-xp-nAz"/>
-                                <include reference="qd5-dz-xN7"/>
-                                <include reference="Ejb-XN-LAN"/>
-                                <include reference="pPJ-BQ-tSc"/>
-                                <include reference="XJA-GM-HBa"/>
-                                <include reference="pgn-3c-1pc"/>
-                                <include reference="AUg-hx-Gk3"/>
-                                <include reference="Kxz-v6-jGr"/>
-                                <include reference="TUN-S3-v1r"/>
-                                <include reference="UXb-7l-ceo"/>
+                                <include reference="Q2Z-wJ-hsv"/>
                                 <include reference="jS4-mZ-D5Z"/>
                                 <include reference="vU2-Fr-rMX"/>
+                                <include reference="eNv-xp-nAz"/>
+                                <include reference="qd5-dz-xN7"/>
+                                <include reference="TUN-S3-v1r"/>
+                                <include reference="UXb-7l-ceo"/>
+                                <include reference="XJA-GM-HBa"/>
+                                <include reference="pgn-3c-1pc"/>
                                 <include reference="Pd0-Vu-pqo"/>
-                                <include reference="Q2Z-wJ-hsv"/>
+                                <include reference="AUg-hx-Gk3"/>
+                                <include reference="Kxz-v6-jGr"/>
+                                <include reference="Ejb-XN-LAN"/>
+                                <include reference="pPJ-BQ-tSc"/>
                             </mask>
                         </variation>
                     </view>

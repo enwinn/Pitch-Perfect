@@ -26,12 +26,12 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
 
         stopButton.enabled = false
         
-        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
         audioPlayer.prepareToPlay()
         
         audioEngine = AVAudioEngine()
-        audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl)
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,7 +88,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         audioPlayer.play()
     }
     
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         if (flag) {
             stopButton.enabled = false
         }
@@ -98,10 +98,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         setAudioSession()
         stopAllAudio()
         
-        var echoPlayerNode = AVAudioPlayerNode()
+        let echoPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(echoPlayerNode)
         
-        var changeEchoEffect = AVAudioUnitDelay()
+        let changeEchoEffect = AVAudioUnitDelay()
         
         // Time taken by the delayed input to reach the output. Range is 0 to 2 seconds. Default is 1
         switch delayTime {
@@ -119,9 +119,9 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
                 changeEchoEffect.feedback = 50.0
         }
         
-        var sampleRate = Float(AVAudioSession.sharedInstance().sampleRate)
-        var rangeBottom: Float = 10.0
-        var rangeTop = (sampleRate / 2.0)
+        let sampleRate = Float(AVAudioSession.sharedInstance().sampleRate)
+        let rangeBottom: Float = 10.0
+        let rangeTop = (sampleRate / 2.0)
         
         // Cutoff frequency, in Hz, above which high frequency content is rolled off
         // Range is 10 Hz through (sampleRate/2). Default is 15000 Hz
@@ -150,7 +150,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
             atTime: nil,
             completionHandler: audioEngineCompletion)
         
-        audioEngine.startAndReturnError(nil)
+        do {
+            try audioEngine.start()
+        } catch _ {
+        }
         
         stopButton.enabled = true
         echoPlayerNode.play()
@@ -160,10 +163,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         setAudioSession()
         stopAllAudio()
         
-        var reverbPlayerNode = AVAudioPlayerNode()
+        let reverbPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(reverbPlayerNode)
         
-        var changeReverbEffect = AVAudioUnitReverb()
+        let changeReverbEffect = AVAudioUnitReverb()
         changeReverbEffect.loadFactoryPreset(preset)
         
         // Blend of wet and dry. Range is 0% (all dry) to 100% (all wet). Default is 100%
@@ -184,7 +187,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
             atTime: nil,
             completionHandler: audioEngineCompletion)
         
-        audioEngine.startAndReturnError(nil)
+        do {
+            try audioEngine.start()
+        } catch _ {
+        }
         
         stopButton.enabled = true
         reverbPlayerNode.play()
@@ -195,10 +201,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         setAudioSession()
         stopAllAudio()
         
-        var audioPlayerNode = AVAudioPlayerNode()
+        let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
-        var changePitchEffect = AVAudioUnitTimePitch()
+        let changePitchEffect = AVAudioUnitTimePitch()
         
         // Pitch is defined in cents. Default is 1.0. Range is -2400.0 to 2400.0 One octave is 1200 cents, one semitone is 100 cents
         switch pitch {
@@ -233,7 +239,10 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
             atTime: nil,
             completionHandler: audioEngineCompletion)
         
-        audioEngine.startAndReturnError(nil)
+        do {
+            try audioEngine.start()
+        } catch _ {
+        }
         
         stopButton.enabled = true
         audioPlayerNode.play()
@@ -258,8 +267,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func setAudioSession() {
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
-        AVAudioSession.sharedInstance().setActive(true, error: nil)
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        } catch _ {
+        }
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch _ {
+        }
     }
 }
 
