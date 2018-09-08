@@ -3,7 +3,7 @@
 //  Pitch Perfect
 //
 //  Created by Eric Winn on 3/22/15.
-//  Copyright (c) 2015 Eric N. Winn. All rights reserved.
+//  Copyright (c) 2018 Eric N. Winn. All rights reserved.
 //
 
 import Foundation

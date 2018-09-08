@@ -3,7 +3,7 @@
 //  Pitch Perfect
 //
 //  Created by Eric Winn on 3/15/15.
-//  Copyright (c) 2015 Eric N. Winn. All rights reserved.
+//  Copyright (c) 2018 Eric N. Winn. All rights reserved.
 //
 
 // NOTE: Renamed github remote repo from UDACITY to Pitch-Perfect
@@ -28,26 +28,26 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recordLabel.text = "Tap to Record"
-        stopButton.hidden = true
+        stopButton.isHidden = true
     }
     
     @IBAction func recordAudio(sender: UIButton) {
         recordLabel.text = "recording..."
-        stopButton.hidden = false
-        recordButton.enabled = false
+        stopButton.isHidden = false
+        recordButton.isEnabled = false
         
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         
         let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd-HHmmss"
         
-        let recordingName = formatter.stringFromDate(currentDateTime) + ".wav"
+        let recordingName = formatter.string(from: currentDateTime as Date) + ".wav"
         let pathArray = [dirPath, recordingName]
-        let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        let filePath = NSURL.fileURL(withPathComponents: pathArray)
         
         let session = AVAudioSession.sharedInstance()
         do {
@@ -56,31 +56,31 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
 //        audioRecorder = try? AVAudioRecorder(URL: filePath!, settings: nil)
-        audioRecorder = try? AVAudioRecorder(URL: filePath!, settings: [:])
+        audioRecorder = try? AVAudioRecorder(url: filePath!, settings: [:])
         audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
+        audioRecorder.isMeteringEnabled = true
         audioRecorder.record()
         
     }
     
     // NOTE: The delegate calls this function
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if (flag) {
             // Step 1 - Save the recorded audio
-            recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
+            recordedAudio = RecordedAudio(filePathUrl: recorder.url as NSURL, title: recorder.url.lastPathComponent)
             
             // Step 2 - perform segue
-            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio) }
+            self.performSegue(withIdentifier: "stopRecording", sender: recordedAudio) }
         else {
-            recordButton.enabled = true
+            recordButton.isEnabled = true
             recordLabel.text = "Tap to Record"
-            stopButton.hidden = true
+            stopButton.isHidden = true
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "stopRecording") {
-            let playSoundsVC: PlaySoundsViewController = segue.destinationViewController as! PlaySoundsViewController
+            let playSoundsVC: PlaySoundsViewController = segue.destination as! PlaySoundsViewController
             let data = sender as! RecordedAudio
             playSoundsVC.receivedAudio = data
         }
@@ -88,8 +88,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func stopButton(sender: UIButton) {
         recordLabel.text = "Tap to Record"
-        stopButton.hidden = true
-        recordButton.enabled = true
+        stopButton.isHidden = true
+        recordButton.isEnabled = true
         
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()

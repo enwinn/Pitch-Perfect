@@ -3,7 +3,7 @@
 //  Pitch PerfectTests
 //
 //  Created by Eric Winn on 3/15/15.
-//  Copyright (c) 2015 Eric N. Winn. All rights reserved.
+//  Copyright (c) 2018 Eric N. Winn. All rights reserved.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class Pitch_PerfectTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }
