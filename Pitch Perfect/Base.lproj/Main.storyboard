@@ -29,7 +29,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="playSlowAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="U3L-KX-wMl"/>
+                                    <action selector="playSlowAudioWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="GG5-ZR-Nhv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6T-br-Sro">
@@ -38,7 +38,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopAudioPlay:" destination="fQd-UO-PMv" eventType="touchUpInside" id="yZw-1l-7DS"/>
+                                    <action selector="stopAudioPlayWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="Ikq-14-i3D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv8-Ug-OOK">
@@ -47,7 +47,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="playChipmunkAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="9Cm-AN-2Rk"/>
+                                    <action selector="playChipmunkAudioWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="b8b-gT-rUF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Du-ni8">
@@ -56,7 +56,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="DarthVaderButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="277-sX-lE4"/>
+                                    <action selector="DarthVaderButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="dCh-FA-PW3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b4-d6-Vfq">
@@ -65,7 +65,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="reverbButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="7ZT-0q-fY8"/>
+                                    <action selector="reverbButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="K4e-dC-HVl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mq-fB-9Zt">
@@ -74,7 +74,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="echoButton:" destination="fQd-UO-PMv" eventType="touchUpInside" id="1lA-xD-uEl"/>
+                                    <action selector="echoButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="HV6-s6-x72"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-a4-GeI">
@@ -83,7 +83,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="playFastAudio:" destination="fQd-UO-PMv" eventType="touchUpInside" id="HFH-e5-olQ"/>
+                                    <action selector="playFastAudioWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="QOE-nI-en5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -185,7 +185,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="recordAudio:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qwd-DH-S1w"/>
+                                    <action selector="recordAudioWithSender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MpJ-eD-MmO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fF-nT-Otq">
@@ -200,7 +200,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xqC-fO-W4X"/>
+                                    <action selector="stopButtonWithSender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="plw-Pl-Lmf"/>
                                 </connections>
                             </button>
                         </subviews>
