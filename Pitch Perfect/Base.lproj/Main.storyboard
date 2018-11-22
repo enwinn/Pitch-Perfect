@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vvx-Fg-H5z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vvx-Fg-H5z">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-4t-W39">
-                                <rect key="frame" x="41" y="138" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-4t-W39" userLabel="Slow Button">
+                                <rect key="frame" x="41" y="138" width="200" height="200"/>
                                 <state key="normal" image="SlowButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -33,7 +31,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6T-br-Sro">
-                                <rect key="frame" x="162.66666666666666" y="678" width="50" height="50"/>
+                                <rect key="frame" x="137.66666666666666" y="628" width="100" height="100"/>
                                 <state key="normal" image="StopButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -41,8 +39,8 @@
                                     <action selector="stopAudioPlayWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="Ikq-14-i3D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv8-Ug-OOK">
-                                <rect key="frame" x="41" y="268" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv8-Ug-OOK" userLabel="Chipmunk Button">
+                                <rect key="frame" x="41" y="368" width="200" height="200"/>
                                 <state key="normal" image="chipmunkButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -50,8 +48,8 @@
                                     <action selector="playChipmunkAudioWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="b8b-gT-rUF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Du-ni8">
-                                <rect key="frame" x="234" y="268" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Du-ni8" userLabel="Darth Button">
+                                <rect key="frame" x="134" y="368" width="200" height="200"/>
                                 <state key="normal" image="DarthVaderButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -59,8 +57,8 @@
                                     <action selector="DarthVaderButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="dCh-FA-PW3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b4-d6-Vfq">
-                                <rect key="frame" x="51" y="401" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b4-d6-Vfq" userLabel="Reverb Button">
+                                <rect key="frame" x="51" y="601" width="160" height="160"/>
                                 <state key="normal" image="reverbButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -68,8 +66,8 @@
                                     <action selector="reverbButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="K4e-dC-HVl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mq-fB-9Zt">
-                                <rect key="frame" x="244" y="398" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mq-fB-9Zt" userLabel="Echo Button">
+                                <rect key="frame" x="164" y="598" width="160" height="160"/>
                                 <state key="normal" image="echoButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -77,8 +75,8 @@
                                     <action selector="echoButtonWithSender:" destination="fQd-UO-PMv" eventType="touchUpInside" id="HV6-s6-x72"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-a4-GeI">
-                                <rect key="frame" x="234" y="138" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-a4-GeI" userLabel="Fast Button">
+                                <rect key="frame" x="134" y="138" width="200" height="200"/>
                                 <state key="normal" image="fastButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -116,19 +114,19 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Q2Z-wJ-hsv"/>
-                                <exclude reference="jS4-mZ-D5Z"/>
-                                <exclude reference="vU2-Fr-rMX"/>
                                 <exclude reference="eNv-xp-nAz"/>
                                 <exclude reference="qd5-dz-xN7"/>
-                                <exclude reference="TUN-S3-v1r"/>
-                                <exclude reference="UXb-7l-ceo"/>
                                 <exclude reference="XJA-GM-HBa"/>
                                 <exclude reference="pgn-3c-1pc"/>
-                                <exclude reference="Pd0-Vu-pqo"/>
-                                <exclude reference="AUg-hx-Gk3"/>
-                                <exclude reference="Kxz-v6-jGr"/>
                                 <exclude reference="Ejb-XN-LAN"/>
                                 <exclude reference="pPJ-BQ-tSc"/>
+                                <exclude reference="AUg-hx-Gk3"/>
+                                <exclude reference="Kxz-v6-jGr"/>
+                                <exclude reference="Pd0-Vu-pqo"/>
+                                <exclude reference="TUN-S3-v1r"/>
+                                <exclude reference="UXb-7l-ceo"/>
+                                <exclude reference="jS4-mZ-D5Z"/>
+                                <exclude reference="vU2-Fr-rMX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -143,19 +141,19 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="Q2Z-wJ-hsv"/>
-                                <include reference="jS4-mZ-D5Z"/>
-                                <include reference="vU2-Fr-rMX"/>
                                 <include reference="eNv-xp-nAz"/>
                                 <include reference="qd5-dz-xN7"/>
-                                <include reference="TUN-S3-v1r"/>
-                                <include reference="UXb-7l-ceo"/>
                                 <include reference="XJA-GM-HBa"/>
                                 <include reference="pgn-3c-1pc"/>
-                                <include reference="Pd0-Vu-pqo"/>
-                                <include reference="AUg-hx-Gk3"/>
-                                <include reference="Kxz-v6-jGr"/>
                                 <include reference="Ejb-XN-LAN"/>
                                 <include reference="pPJ-BQ-tSc"/>
+                                <include reference="AUg-hx-Gk3"/>
+                                <include reference="Kxz-v6-jGr"/>
+                                <include reference="Pd0-Vu-pqo"/>
+                                <include reference="TUN-S3-v1r"/>
+                                <include reference="UXb-7l-ceo"/>
+                                <include reference="jS4-mZ-D5Z"/>
+                                <include reference="vU2-Fr-rMX"/>
                             </mask>
                         </variation>
                     </view>
@@ -180,7 +178,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6g-Z2-ieS">
-                                <rect key="frame" x="137.66666666666666" y="356" width="100" height="100"/>
+                                <rect key="frame" x="87.666666666666686" y="306" width="200" height="200"/>
                                 <state key="normal" image="Microphone">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -189,13 +187,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fF-nT-Otq">
-                                <rect key="frame" x="151.66666666666666" y="466" width="71.666666666666657" height="19.666666666666686"/>
+                                <rect key="frame" x="151.66666666666666" y="516" width="72" height="20"/>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
                                 <color key="textColor" red="0.14509803921568626" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVU-jR-yWO">
-                                <rect key="frame" x="162.66666666666666" y="701" width="50" height="50"/>
+                                <rect key="frame" x="137.66666666666666" y="651" width="100" height="100"/>
                                 <state key="normal" image="StopButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -221,11 +219,11 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="5wu-cM-0ep"/>
+                                <exclude reference="3GD-zw-3CB"/>
+                                <exclude reference="QVz-7Z-YbO"/>
                                 <exclude reference="1gY-7w-vOm"/>
                                 <exclude reference="3go-6A-FgY"/>
                                 <exclude reference="Mmv-Bj-nHi"/>
-                                <exclude reference="3GD-zw-3CB"/>
-                                <exclude reference="QVz-7Z-YbO"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -236,11 +234,11 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="5wu-cM-0ep"/>
+                                <include reference="3GD-zw-3CB"/>
+                                <include reference="QVz-7Z-YbO"/>
                                 <include reference="1gY-7w-vOm"/>
                                 <include reference="3go-6A-FgY"/>
                                 <include reference="Mmv-Bj-nHi"/>
-                                <include reference="3GD-zw-3CB"/>
-                                <include reference="QVz-7Z-YbO"/>
                             </mask>
                         </variation>
                     </view>
@@ -276,13 +274,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DarthVaderButton" width="100" height="100"/>
-        <image name="Microphone" width="100" height="100"/>
-        <image name="SlowButton" width="100" height="100"/>
-        <image name="StopButton" width="50" height="50"/>
-        <image name="chipmunkButton" width="100" height="100"/>
-        <image name="echoButton" width="80" height="80"/>
-        <image name="fastButton" width="100" height="100"/>
-        <image name="reverbButton" width="80" height="80"/>
+        <image name="DarthVaderButton" width="200" height="200"/>
+        <image name="Microphone" width="200" height="200"/>
+        <image name="SlowButton" width="200" height="200"/>
+        <image name="StopButton" width="100" height="100"/>
+        <image name="chipmunkButton" width="200" height="200"/>
+        <image name="echoButton" width="160" height="160"/>
+        <image name="fastButton" width="200" height="200"/>
+        <image name="reverbButton" width="160" height="160"/>
     </resources>
 </document>

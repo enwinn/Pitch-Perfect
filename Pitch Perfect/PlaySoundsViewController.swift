@@ -11,13 +11,17 @@ import AVFoundation
 
 // NOTE: Full property sets and range checks are for future expansion
 // NOTE: Renamed github remote repo from UDACITY to Pitch-Perfect
+// NOTE: Add a 7th button for adhoc playback with more control with something like:
+//       https://www.hackingwithswift.com/example-code/media/how-to-control-the-pitch-and-speed-of-audio-using-avaudioengine
+// NOTE: Swift 4.2 change reference https://stackoverflow.com/questions/52413107/avaudiosession-setcategory-availability-in-swift-4-2
+
 
 class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBOutlet weak var stopButton: UIButton!
     
-    var audioPlayer: AVAudioPlayer!
-    var receivedAudio: RecordedAudio!
+    var audioPlayerNode: AVAudioPlayerNode!
+    var receivedAudio: URL!
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
     
@@ -26,12 +30,24 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
 
         stopButton.isEnabled = false
         
-        audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudio.filePathUrl as URL)
-        audioPlayer.enableRate = true
-        audioPlayer.prepareToPlay()
+        do {
+            audioFile = try AVAudioFile(forReading: receivedAudio as URL)
+        } catch {
+            let ac = UIAlertController(title: "Audio file error", message: "There was a problem accessing the recording, call AAA!.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
         
+//        audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudio)
+//        audioPlayer.enableRate = true
+//        audioPlayer.prepareToPlay()
+//
         audioEngine = AVAudioEngine()
-        audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl as URL)
+        audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attach(audioPlayerNode)
+        
+        
+//        audioFile = try? AVAudioFile(forReading: receivedAudio)
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,21 +87,21 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         stopAllAudio()
         
         // Always start at the beginning of the track
-        audioPlayer.currentTime = 0.0
+//        audioPlayerNode.currentTime = 0.0
         
         // Rate default is 1.0. Range is 0.5 to 2.0 (half to double)
         switch speed {
             case 0.5...2.0:
-                audioPlayer.rate = speed
+                audioPlayerNode.rate = speed
             default:
-                audioPlayer.rate = 1.0
+                audioPlayerNode.rate = 1.0
         }
         
-        audioPlayer.delegate = self
-        audioPlayer.isMeteringEnabled = true
+//        audioPlayerNode.delegate = self
+//        audioPlayerNode.isMeteringEnabled = true
         
         stopButton.isEnabled = true
-        audioPlayer.play()
+        audioPlayerNode.play()
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -257,7 +273,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func stopAllAudio() {
-        audioPlayer.stop()
+        audioPlayerNode.stop()
         audioEngine.stop()
         audioEngine.reset()
         stopButton.isEnabled = false
@@ -265,7 +281,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     
     func setAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [])
         } catch _ {
         }
         do {
@@ -275,3 +291,8 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}
