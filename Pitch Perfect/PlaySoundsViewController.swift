@@ -21,7 +21,8 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var stopButton: UIButton!
     
     var audioPlayerNode: AVAudioPlayerNode!
-    var receivedAudio: URL!
+    var audioPlayer: AVAudioPlayer!
+    var receivedAudioFilename: URL!
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
     
@@ -31,17 +32,24 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         stopButton.isEnabled = false
         
         do {
-            audioFile = try AVAudioFile(forReading: receivedAudio as URL)
+//            audioFile = try AVAudioFile(forReading: receivedAudio as URL)
+            audioFile = try AVAudioFile(forReading: receivedAudioFilename)
+//            audioPlayer = try AVAudioPlayer(contentsOf: receivedAudio)
         } catch {
             let ac = UIAlertController(title: "Audio file error", message: "There was a problem accessing the recording, call AAA!.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
-        
+
+        // Older stuff
+        audioPlayer.delegate = self
 //        audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudio)
-//        audioPlayer.enableRate = true
-//        audioPlayer.prepareToPlay()
-//
+        audioPlayer.enableRate = true
+        audioPlayer.prepareToPlay()
+
+
+
+        // Newer stuff
         audioEngine = AVAudioEngine()
         audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attach(audioPlayerNode)
@@ -292,7 +300,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
 }
 
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
-}
+//// Helper function inserted by Swift 4.2 migrator.
+//fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+//    return input.rawValue
+//}
