@@ -16,6 +16,7 @@
 		33F2CF2B1ABE2C7400CCA798 /* PlaySoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2CF2A1ABE2C7400CCA798 /* PlaySoundsViewController.swift */; };
 		33F2CF2F1ABE615400CCA798 /* movie_quote.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F2CF2E1ABE615400CCA798 /* movie_quote.mp3 */; };
 		33F2CF311ABF8E1700CCA798 /* RecordedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2CF301ABF8E1600CCA798 /* RecordedAudio.swift */; };
+		5DC5DB8521AA756D00A05DD7 /* PlaySoundsViewController+Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC5DB8421AA756D00A05DD7 /* PlaySoundsViewController+Audio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		33F2CF2C1ABE41BA00CCA798 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		33F2CF2E1ABE615400CCA798 /* movie_quote.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = movie_quote.mp3; sourceTree = "<group>"; };
 		33F2CF301ABF8E1600CCA798 /* RecordedAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordedAudio.swift; sourceTree = "<group>"; };
+		5DC5DB8421AA756D00A05DD7 /* PlaySoundsViewController+Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlaySoundsViewController+Audio.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				3324EC4F1AB63CE500E17277 /* Main.storyboard */,
 				33F2CF301ABF8E1600CCA798 /* RecordedAudio.swift */,
 				33F2CF2A1ABE2C7400CCA798 /* PlaySoundsViewController.swift */,
+				5DC5DB8421AA756D00A05DD7 /* PlaySoundsViewController+Audio.swift */,
 				3324EC521AB63CE500E17277 /* Images.xcassets */,
 				3324EC541AB63CE500E17277 /* LaunchScreen.xib */,
 				3324EC491AB63CE400E17277 /* Supporting Files */,
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC5DB8521AA756D00A05DD7 /* PlaySoundsViewController+Audio.swift in Sources */,
 				33F2CF311ABF8E1700CCA798 /* RecordedAudio.swift in Sources */,
 				3324EC4E1AB63CE500E17277 /* RecordSoundsViewController.swift in Sources */,
 				33F2CF2B1ABE2C7400CCA798 /* PlaySoundsViewController.swift in Sources */,
