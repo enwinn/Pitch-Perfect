@@ -18,6 +18,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     
     var audioRecorder: AVAudioRecorder!
+    var audioName: String!
     var audioFilename: URL!
     var recordingSession: AVAudioSession!
 
@@ -34,36 +35,28 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func recordAudio(sender: UIButton) {
         // Annoying Swift 4.1 and iOS 10+ issue: https://stackoverflow.com/questions/52413107/avaudiosession-setcategory-availability-in-swift-4-2
         let recordingSession = AVAudioSession.sharedInstance()
-//        do {
-//            try recordingSession.setCategory(.playAndRecord, mode: .default, options: [])
-            do {
-                try recordingSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [])
-            } catch let error {
-                //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
-                print("Could not set audio session category: \(error.localizedDescription)")
-            }
-//            try recordingSession.setCategory(.playAndRecord, mode: .spokenAudio)
-//            try recordingSession.setActive(true)
-            do {
-                try recordingSession.setActive(true, options: [])
-            } catch let error {
-                //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
-                print("Could not set audio session active: \(error.localizedDescription)")
-            }
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [])
+        } catch {
+            //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
+            print("Could not set audio session category: \(error.localizedDescription)")
+        }
+        do {
+            try recordingSession.setActive(true, options: [])
+        } catch {
+            //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
+            print("Could not set audio session active: \(error.localizedDescription)")
+        }
 
-            recordingSession.requestRecordPermission() { [unowned self] allowed in
-                DispatchQueue.main.async {
-                    if allowed {
-                        self.startRecording()
-                    } else {
-                        self.loadFailUI(alertTitle: "Permissions error", alertMessage: "Use of microphone was not approved.")
-                    }
+        recordingSession.requestRecordPermission() { [unowned self] allowed in
+            DispatchQueue.main.async {
+                if allowed {
+                    self.startRecording()
+                } else {
+                    self.loadFailUI(alertTitle: "Permissions error", alertMessage: "Use of microphone was not approved.")
                 }
             }
-//        } catch let error {
-////            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
-//            print("Could not set audio session category: \(error.localizedDescription)")
-//        }
+        }
     }
     
     class func getDocumentsDirectory() -> URL {
@@ -73,10 +66,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     class func getRecordingURL() -> URL {
-                let currentDateTime = NSDate()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyyMMdd-HHmmss"
-                let recordingName = formatter.string(from: currentDateTime as Date) + ".m4a"
+        let currentDateTime = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd-HHmmss"
+        let recordingName = formatter.string(from: currentDateTime as Date) + ".m4a"
+        
+        // Debugging...
+        print("recordingName: \(recordingName)")
         return getDocumentsDirectory().appendingPathComponent(recordingName)
     }
     
@@ -85,9 +81,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.isEnabled = true
         recordButton.isEnabled = false
         audioFilename = RecordSoundsViewController.getRecordingURL()
+        audioName = audioFilename.lastPathComponent
         
         //Debugging...
-        print("audioFilename.absoluteURL: \(audioFilename.absoluteURL)")
+//        print("audioFilename.absoluteURL: \(audioFilename.absoluteURL)")
 
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -98,7 +95,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-//            audioRecorder.delegate = self
+            audioRecorder.delegate = self
             audioRecorder.isMeteringEnabled = true
             audioRecorder.prepareToRecord()
             audioRecorder.record()
@@ -138,15 +135,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "stopRecording" {
             let playSoundsVC = segue.destination as! PlaySoundsViewController
-            let recordedAudioURL = sender as! URL
-            playSoundsVC.receivedAudioFilename = recordedAudioURL
+            // Work-around until I figure out why the seque was not passing the URL value...
+            playSoundsVC.receivedAudioName = audioName
+//            let recordedAudioURL = sender as! URL
+//            playSoundsVC.receivedAudioFilename = recordedAudioURL
         }
     }
     
 }
 
-
-//// Helper function inserted by Swift 4.2 migrator.
-//fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-//    return input.rawValue
-//}

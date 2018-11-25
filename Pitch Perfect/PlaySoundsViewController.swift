@@ -23,6 +23,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     var audioPlayerNode: AVAudioPlayerNode!
     var audioPlayer: AVAudioPlayer!
     var receivedAudioFilename: URL!
+    var receivedAudioName: String!
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
     
@@ -30,38 +31,25 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
 
         stopButton.isEnabled = false
+        receivedAudioFilename = PlaySoundsViewController.getDocumentsDirectory().appendingPathComponent(receivedAudioName)
         
-        do {
-//            audioFile = try AVAudioFile(forReading: receivedAudio as URL)
-            audioFile = try AVAudioFile(forReading: receivedAudioFilename)
-//            audioPlayer = try AVAudioPlayer(contentsOf: receivedAudio)
-        } catch {
-            let ac = UIAlertController(title: "Audio file error", message: "There was a problem accessing the recording, call AAA!.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-        }
-
-        // Older stuff
-        audioPlayer.delegate = self
-//        audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudio)
+        // Debugging
+//        print("receivedAudioName: \(String(describing: receivedAudioName))")
+//        print("receivedAudioFilename: \(receivedAudioFilename.absoluteURL)")
+        
+        audioEngine = AVAudioEngine()
+        audioFile = try? AVAudioFile(forReading: receivedAudioFilename)
+        audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudioFilename)
         audioPlayer.enableRate = true
         audioPlayer.prepareToPlay()
-
-
-
-        // Newer stuff
-        audioEngine = AVAudioEngine()
-        audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attach(audioPlayerNode)
-        
-        
-//        audioFile = try? AVAudioFile(forReading: receivedAudio)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    class func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
-    
+
     @IBAction func playSlowAudio(sender: UIButton) {
         playAudioSpeed(speed: 0.5)
     }
@@ -79,7 +67,12 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func DarthVaderButton(sender: UIButton) {
-        playAudioWithVariablePitch(pitch: -800, rate: 1.0, overlap: 8.0)
+        // Pitch is defined in cents. Default is 1.0. Range is -2400.0 to 2400.0 One octave is 1200 cents, one semitone is 100 cents
+        // Rate default is 1.0. Range is 1/32 to 32.0
+        //Higher value results in fewer artifacts in output signal. Default value is 8.0. Range is 3.0 to 32.0
+
+//        playAudioWithVariablePitch(pitch: -800, rate: 1.0, overlap: 8.0)
+        playAudioWithVariablePitch(pitch: -500, rate: (28/32), overlap: 10.0)
     }
     
     @IBAction func reverbButton(sender: UIButton) {
@@ -95,27 +88,22 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         stopAllAudio()
         
         // Always start at the beginning of the track
-//        audioPlayerNode.currentTime = 0.0
-        
+        audioPlayer.currentTime = 0.0
+        audioPlayer.setVolume(1.0, fadeDuration: 0)
+
         // Rate default is 1.0. Range is 0.5 to 2.0 (half to double)
         switch speed {
             case 0.5...2.0:
-                audioPlayerNode.rate = speed
+                audioPlayer.rate = speed
             default:
-                audioPlayerNode.rate = 1.0
+                audioPlayer.rate = 1.0
         }
         
-//        audioPlayerNode.delegate = self
-//        audioPlayerNode.isMeteringEnabled = true
-        
+        audioPlayer.delegate = self
+        audioPlayer.isMeteringEnabled = true
+
         stopButton.isEnabled = true
-        audioPlayerNode.play()
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (flag) {
-            stopButton.isEnabled = false
-        }
+        audioPlayer.play()
     }
     
     func playAudioWithEcho(delayTime: TimeInterval, feedback: Float, lowPassCutoff: Float, wetDryMix: Float) {
@@ -164,21 +152,16 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
                 changeEchoEffect.wetDryMix = 100.0
         }
         
-        
         audioEngine.attach(changeEchoEffect)
-        
         audioEngine.connect(echoPlayerNode, to: changeEchoEffect, format: nil)
         audioEngine.connect(changeEchoEffect, to: audioEngine.outputNode, format: nil)
-        
-        echoPlayerNode.scheduleFile(audioFile,
-                                    at: nil,
-            completionHandler: audioEngineCompletion)
+        echoPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: audioEngineCompletion)
         
         do {
             try audioEngine.start()
-        } catch _ {
+        } catch {
+            print("Starting audio engine for echo error: \(error.localizedDescription)")
         }
-        
         stopButton.isEnabled = true
         echoPlayerNode.play()
     }
@@ -203,17 +186,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         
         
         audioEngine.attach(changeReverbEffect)
-        
         audioEngine.connect(reverbPlayerNode, to: changeReverbEffect, format: nil)
         audioEngine.connect(changeReverbEffect, to: audioEngine.outputNode, format: nil)
-        
-        reverbPlayerNode.scheduleFile(audioFile,
-                                      at: nil,
-            completionHandler: audioEngineCompletion)
+        reverbPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: audioEngineCompletion)
         
         do {
             try audioEngine.start()
-        } catch _ {
+        } catch {
+            print("Starting audio engine for reverb error: \(error.localizedDescription)")
         }
         
         stopButton.isEnabled = true
@@ -259,13 +239,12 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
         audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
         
-        audioPlayerNode.scheduleFile(audioFile,
-                                     at: nil,
-            completionHandler: audioEngineCompletion)
+        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: audioEngineCompletion)
         
         do {
             try audioEngine.start()
-        } catch _ {
+        } catch {
+            print("Starting audio engine for ptich error: \(error.localizedDescription)")
         }
         
         stopButton.isEnabled = true
@@ -274,14 +253,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func audioEngineCompletion() {
-        // Adjust for latency
+        // Adjust tweaks for latency
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.stopButton.isEnabled = false
         }
     }
     
     func stopAllAudio() {
-        audioPlayerNode.stop()
+        audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
         stopButton.isEnabled = false
@@ -297,10 +276,11 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         } catch _ {
         }
     }
+
+    //MARK: Delegates
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if (flag) {
+            stopButton.isEnabled = false
+        }
+    }
 }
-
-
-//// Helper function inserted by Swift 4.2 migrator.
-//fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-//    return input.rawValue
-//}
