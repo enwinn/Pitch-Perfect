@@ -155,16 +155,16 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fF-nT-Otq">
-                                <rect key="frame" x="151.66666666666666" y="493.66666666666669" width="72" height="20.000000000000057"/>
+                                <rect key="frame" x="151.66666666666666" y="475.66666666666669" width="72" height="20"/>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
                                 <color key="textColor" red="0.14509803921568626" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVU-jR-yWO">
-                                <rect key="frame" x="142.66666666666666" y="658" width="90" height="90"/>
+                                <rect key="frame" x="155.66666666666666" y="706" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="Erg-pA-prU"/>
-                                    <constraint firstAttribute="width" constant="90" id="lWS-uS-WBI"/>
+                                    <constraint firstAttribute="width" constant="64" id="MbH-d5-yo4"/>
+                                    <constraint firstAttribute="height" constant="64" id="RWb-Hc-ej3"/>
                                 </constraints>
                                 <state key="normal" image="StopButton">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -177,11 +177,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="8fF-nT-Otq" secondAttribute="centerX" id="1gY-7w-vOm"/>
-                            <constraint firstItem="SVU-jR-yWO" firstAttribute="centerX" secondItem="j6g-Z2-ieS" secondAttribute="centerX" id="1mf-7Q-HIs"/>
                             <constraint firstAttribute="centerY" secondItem="j6g-Z2-ieS" secondAttribute="centerY" id="3GD-zw-3CB"/>
-                            <constraint firstItem="8fF-nT-Otq" firstAttribute="top" secondItem="j6g-Z2-ieS" secondAttribute="bottom" constant="10" id="3go-6A-FgY"/>
-                            <constraint firstItem="00L-XF-rd8" firstAttribute="top" secondItem="SVU-jR-yWO" secondAttribute="bottom" constant="30" id="I2Q-aM-g5b"/>
+                            <constraint firstItem="8fF-nT-Otq" firstAttribute="top" secondItem="j6g-Z2-ieS" secondAttribute="bottom" constant="-8" id="3go-6A-FgY"/>
                             <constraint firstAttribute="centerX" secondItem="j6g-Z2-ieS" secondAttribute="centerX" id="QVz-7Z-YbO"/>
+                            <constraint firstItem="00L-XF-rd8" firstAttribute="top" secondItem="SVU-jR-yWO" secondAttribute="bottom" constant="8" id="Skn-R6-e7e"/>
+                            <constraint firstItem="SVU-jR-yWO" firstAttribute="centerX" secondItem="8fF-nT-Otq" secondAttribute="centerX" id="Tll-Dl-mSl"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
