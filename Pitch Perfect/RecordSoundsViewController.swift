@@ -36,13 +36,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Annoying Swift 4.1 and iOS 10+ issue: https://stackoverflow.com/questions/52413107/avaudiosession-setcategory-availability-in-swift-4-2
         let recordingSession = AVAudioSession.sharedInstance()
         do {
-            try recordingSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [])
+            try recordingSession.setCategory(.playAndRecord, mode: .spokenAudio, options: .defaultToSpeaker)
         } catch {
             //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
             print("Could not set audio session category: \(error.localizedDescription)")
         }
         do {
-            try recordingSession.setActive(true, options: [])
+            try recordingSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             //            self.loadFailUI(alertTitle: "Audio session error", alertMessage: "Could not initialize audio session.")
             print("Could not set audio session active: \(error.localizedDescription)")
@@ -66,11 +66,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     class func getRecordingURL() -> URL {
-        let currentDateTime = NSDate()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd-HHmmss"
-        let recordingName = formatter.string(from: currentDateTime as Date) + ".m4a"
-        
+        // Placeholder for future developtment
+//        let currentDateTime = NSDate()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyyMMdd-HHmmss"
+//        let recordingName = formatter.string(from: currentDateTime as Date) + ".m4a"
+        let recordingName = "PitchPerfect.m4a"
+
         // Debugging...
         print("recordingName: \(recordingName)")
         return getDocumentsDirectory().appendingPathComponent(recordingName)
@@ -96,7 +98,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.delegate = self
-            audioRecorder.isMeteringEnabled = true
+            audioRecorder.isMeteringEnabled = false
             audioRecorder.prepareToRecord()
             audioRecorder.record()
         } catch {
@@ -117,7 +119,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setActive(false, options: [])
+            try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
         } catch _ {
             loadFailUI(alertTitle: "Audio session error", alertMessage: "Error trying to set the audio session to inactive.")
         }

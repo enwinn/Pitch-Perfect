@@ -72,7 +72,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         //Higher value results in fewer artifacts in output signal. Default value is 8.0. Range is 3.0 to 32.0
 
 //        playAudioWithVariablePitch(pitch: -800, rate: 1.0, overlap: 8.0)
-        playAudioWithVariablePitch(pitch: -500, rate: (28/32), overlap: 10.0)
+        playAudioWithVariablePitch(pitch: -700, rate: (28/32), overlap: 10.0)
     }
     
     @IBAction func reverbButton(sender: UIButton) {
@@ -100,7 +100,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         }
         
         audioPlayer.delegate = self
-        audioPlayer.isMeteringEnabled = true
+        audioPlayer.isMeteringEnabled = false
 
         stopButton.isEnabled = true
         audioPlayer.play()
@@ -268,11 +268,11 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     
     func setAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .spokenAudio, options: .defaultToSpeaker)
         } catch _ {
         }
         do {
-            try AVAudioSession.sharedInstance().setActive(true)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch _ {
         }
     }
