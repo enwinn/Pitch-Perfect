@@ -190,10 +190,12 @@
                                 <exclude reference="SVU-jR-yWO"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Skn-R6-e7e"/>
                                 <exclude reference="3GD-zw-3CB"/>
                                 <exclude reference="QVz-7Z-YbO"/>
                                 <exclude reference="1gY-7w-vOm"/>
                                 <exclude reference="3go-6A-FgY"/>
+                                <exclude reference="Tll-Dl-mSl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -203,10 +205,12 @@
                                 <include reference="SVU-jR-yWO"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Skn-R6-e7e"/>
                                 <include reference="3GD-zw-3CB"/>
                                 <include reference="QVz-7Z-YbO"/>
                                 <include reference="1gY-7w-vOm"/>
                                 <include reference="3go-6A-FgY"/>
+                                <include reference="Tll-Dl-mSl"/>
                             </mask>
                         </variation>
                     </view>
